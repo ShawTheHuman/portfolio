@@ -3,6 +3,9 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: 'http://braver.design/',
+  base: '/',
   plugins: [react()],
+  server: {
+    port: 3000
+  }
 })
