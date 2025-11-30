@@ -16,6 +16,12 @@
 
   --border-color: #27272a;
 
+  /* Chat Bubbles */
+  --user-bubble-bg: #3b82f6;
+  --user-bubble-text: #ffffff;
+  --bot-bubble-bg: #27272a;
+  --bot-bubble-text: #ffffff;
+
   /* Typography */
   --font-sans: 'Hubot Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-secondary: 'Work Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
