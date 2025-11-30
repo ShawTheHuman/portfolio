@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from 'react'
 import MessageBubble from './MessageBubble'
 import QuickReply from './QuickReply'
 import TypingIndicator from './TypingIndicator'
+import ProjectDetailPanel from './ProjectDetailPanel'
 import conversationData from '../data/conversationData'
+import projectDetails from '../data/projectDetails'
 import analytics from '../utils/analytics'
 import '../styles/ChatInterface.css'
 
@@ -11,6 +13,12 @@ const ChatInterface = () => {
     const [currentNode, setCurrentNode] = useState('welcome');
     const [isTyping, setIsTyping] = useState(false);
     const [showQuickReplies, setShowQuickReplies] = useState(false);
+
+    // Detail Panel State
+    const [isPanelOpen, setIsPanelOpen] = useState(false);
+    const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
+    const [activeProjectId, setActiveProjectId] = useState(null);
+
     const messagesEndRef = useRef(null);
     const chatContainerRef = useRef(null);
 
@@ -19,11 +27,19 @@ const ChatInterface = () => {
         // Load from session storage if available
         const savedMessages = sessionStorage.getItem('chat_messages');
         const savedNode = sessionStorage.getItem('current_node');
+        const savedPanelState = sessionStorage.getItem('panel_state');
 
         if (savedMessages && savedNode) {
             setMessages(JSON.parse(savedMessages));
             setCurrentNode(savedNode);
             setShowQuickReplies(true);
+
+            if (savedPanelState) {
+                const { isOpen, isCollapsed, projectId } = JSON.parse(savedPanelState);
+                setIsPanelOpen(isOpen);
+                setIsPanelCollapsed(isCollapsed);
+                setActiveProjectId(projectId);
+            }
         } else {
             // Start fresh conversation
             startConversation('welcome');
@@ -35,8 +51,13 @@ const ChatInterface = () => {
         if (messages.length > 0) {
             sessionStorage.setItem('chat_messages', JSON.stringify(messages));
             sessionStorage.setItem('current_node', currentNode);
+            sessionStorage.setItem('panel_state', JSON.stringify({
+                isOpen: isPanelOpen,
+                isCollapsed: isPanelCollapsed,
+                projectId: activeProjectId
+            }));
         }
-    }, [messages, currentNode]);
+    }, [messages, currentNode, isPanelOpen, isPanelCollapsed, activeProjectId]);
 
     // Auto-scroll to bottom
     useEffect(() => {
@@ -124,6 +145,13 @@ const ChatInterface = () => {
         setIsTyping(true);
         setCurrentNode(nodeId);
 
+        // Handle Detail Panel Trigger
+        if (node.detailPanelId) {
+            setActiveProjectId(node.detailPanelId);
+            setIsPanelOpen(true);
+            setIsPanelCollapsed(false);
+        }
+
         // Simulate typing delay
         setTimeout(() => {
             const newBotMessages = node.botMessages.map((msg, index) => ({
@@ -183,13 +211,27 @@ const ChatInterface = () => {
         setMessages(newMessages);
         setCurrentNode(targetNodeId);
         setShowQuickReplies(true);
+
+        // Check if we should close the panel when navigating back
+        if (targetNodeId === 'projects' || targetNodeId === 'welcome') {
+            setIsPanelOpen(false);
+        }
+    };
+
+    const togglePanelCollapse = () => {
+        setIsPanelCollapsed(!isPanelCollapsed);
+    };
+
+    const closePanel = () => {
+        setIsPanelOpen(false);
+        setActiveProjectId(null);
     };
 
     const currentNodeData = conversationData[currentNode];
 
     return (
-        <div className="chat-interface">
-            <div className="chat-container" ref={chatContainerRef}>
+        <div className={`chat-interface ${isPanelOpen && !isPanelCollapsed ? 'split-view' : ''}`}>
+            <div className={`chat-container ${isPanelOpen && !isPanelCollapsed ? 'with-panel' : ''}`} ref={chatContainerRef}>
                 <div className="messages-container">
                     {messages.map((message) => (
                         <MessageBubble
@@ -234,6 +276,14 @@ const ChatInterface = () => {
                     </div>
                 )}
             </div>
+
+            <ProjectDetailPanel
+                projectData={activeProjectId ? projectDetails[activeProjectId] : null}
+                isOpen={isPanelOpen}
+                isCollapsed={isPanelCollapsed}
+                onToggleCollapse={togglePanelCollapse}
+                onClose={closePanel}
+            />
         </div>
     );
 };

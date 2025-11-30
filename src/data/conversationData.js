@@ -55,6 +55,7 @@ const conversationData = {
             "🎮 Digital PowerPacks",
             "GameStop · 2025 · New Product Launch"
         ],
+        detailPanelId: 'digital_power_packs',
         quickReplies: [
             { id: 'project_digital_power_packs_details', label: 'Tell me more', icon: '📖' },
             { id: 'projects', label: '← Back to projects', icon: '🎨' }
@@ -95,6 +96,7 @@ const conversationData = {
             "💰 Improving Sponsorship Rates with Budget Tiers",
             "Indeed · 2024 · Monetization & Growth"
         ],
+        detailPanelId: 'budget_tiers',
         quickReplies: [
             { id: 'project_budget_tiers_problem', label: 'What was the problem?', icon: '❓' },
             { id: 'project_budget_tiers_solution', label: 'The solution', icon: '💡' },
@@ -167,6 +169,7 @@ const conversationData = {
             "Indeed · 2023 · Monetization & Growth",
             "Streamlining the campaign creation process for job sponsors."
         ],
+        detailPanelId: 'activations',
         quickReplies: [
             { id: 'projects', label: 'See other projects', icon: '🎨' },
             { id: 'welcome', label: '← Back to menu', icon: '🏠' }
@@ -181,6 +184,7 @@ const conversationData = {
             "Indeed · 2022 · Design Systems",
             "Building tools and systems to support mid-market employers on the Indeed platform."
         ],
+        detailPanelId: 'indeed_midmarket',
         quickReplies: [
             { id: 'projects', label: 'See other projects', icon: '🎨' },
             { id: 'welcome', label: '← Back to menu', icon: '🏠' }
@@ -195,6 +199,7 @@ const conversationData = {
             "Handsome (for Splunk) · 2020",
             "Built a comprehensive design system for Splunk's enterprise products."
         ],
+        detailPanelId: 'splunk',
         quickReplies: [
             { id: 'projects', label: 'See other projects', icon: '🎨' },
             { id: 'welcome', label: '← Back to menu', icon: '🏠' }
@@ -209,6 +214,7 @@ const conversationData = {
             "Jet.com · 2018 · Android & iOS",
             "Designed an intuitive grocery shopping experience for Jet.com's mobile apps."
         ],
+        detailPanelId: 'jet',
         quickReplies: [
             { id: 'projects', label: 'See other projects', icon: '🎨' },
             { id: 'welcome', label: '← Back to menu', icon: '🏠' }

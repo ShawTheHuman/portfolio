@@ -5,6 +5,11 @@
     flex-direction: column;
     background: var(--bg-primary);
     position: relative;
+    overflow: hidden;
+}
+
+.chat-interface.split-view {
+    flex-direction: row;
 }
 
 .chat-container {
@@ -17,6 +22,14 @@
     height: 100%;
     position: relative;
     overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.chat-container.with-panel {
+    flex: 0 0 45%;
+    max-width: none;
+    margin: 0;
+    border-right: 1px solid var(--border-color);
 }
 
 .messages-container {
