@@ -9,6 +9,8 @@
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -19,6 +21,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    height: 100%;
+    width: 100%;
 }
 
 a {

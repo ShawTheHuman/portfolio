@@ -161,14 +161,14 @@ const ChatInterface = () => {
                 timestamp: new Date().toISOString(),
                 nodeId: nodeId,
                 image: index === node.botMessages.length - 1 ? node.image : null,
-                isClickable: true // Make bot messages clickable for navigation back
+                isClickable: false // Bot messages should not be clickable
             }));
 
             setMessages(prev => {
-                // Make all previous messages clickable
+                // Make only previous user messages clickable for navigation
                 const updatedPrevMessages = prev.map(msg => ({
                     ...msg,
-                    isClickable: msg.type === 'bot' || msg.type === 'user'
+                    isClickable: msg.type === 'user'
                 }));
                 return [...updatedPrevMessages, ...newBotMessages];
             });

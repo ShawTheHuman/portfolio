@@ -20,7 +20,7 @@ function App() {
     return (
         <Router>
             <div className="app-container">
-                <Header onWorkClick={toggleWorkOverlay} />
+                <Header />
                 <WorkOverlay
                     isOpen={isWorkOverlayOpen}
                     onClose={() => setIsWorkOverlayOpen(false)}

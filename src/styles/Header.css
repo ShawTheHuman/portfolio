@@ -50,8 +50,7 @@
 }
 
 @media (max-width: 768px) {
-    .header-nav {
-        display: none;
-        /* Simple mobile menu handling for now */
+    .header {
+        padding: 0 var(--spacing-sm);
     }
 }
