@@ -105,7 +105,7 @@
 }
 
 .theme-toggle-button.dark {
-    background: var(--accent-color);
+    background: var(--accent-color-solid);
 }
 
 .theme-toggle-button.light {

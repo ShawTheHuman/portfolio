@@ -1,11 +1,11 @@
 import React from 'react'
 import '../styles/QuickReply.css'
 
-const QuickReply = ({ replies, onReplyClick, disabled = false }) => {
+const QuickReply = ({ replies, onReplyClick, disabled = false, isCompact = false }) => {
     if (!replies || replies.length === 0) return null;
 
     return (
-        <div className="quick-reply-container">
+        <div className={`quick-reply-container ${isCompact ? 'compact' : ''}`}>
             {replies.map((reply) => (
                 <button
                     key={reply.id}

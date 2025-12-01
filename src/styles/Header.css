@@ -24,7 +24,7 @@
 }
 
 .header-logo:hover {
-    color: var(--accent-color);
+    color: var(--accent-color-solid);
 }
 
 .header-nav ul {

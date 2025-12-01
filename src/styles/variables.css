@@ -9,15 +9,16 @@
   --text-secondary: #a1a1aa;
   --text-muted: #52525b;
 
-  --accent-color: #3b82f6;
-  /* Blue accent */
-  --accent-color-rgb: 59, 130, 246;
-  --accent-glow: rgba(59, 130, 246, 0.5);
+  --accent-color: linear-gradient(135deg, #3d3366, #5a5a8f);
+  /* Purple gradient accent - WCAG AA compliant */
+  --accent-color-solid: #4a4477;
+  --accent-color-rgb: 74, 68, 119;
+  --accent-glow: rgba(74, 68, 119, 0.5);
 
   --border-color: #27272a;
 
   /* Chat Bubbles */
-  --user-bubble-bg: #3b82f6;
+  --user-bubble-bg: linear-gradient(135deg, #3d3366, #5a5a8f);
   --user-bubble-text: #ffffff;
   --bot-bubble-bg: #27272a;
   --bot-bubble-text: #ffffff;
