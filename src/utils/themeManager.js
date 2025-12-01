@@ -41,8 +41,8 @@ class ThemeManager {
 
             root.style.setProperty('--border-color', '#e5e5e5');
 
-            root.style.setProperty('--user-bubble-bg', '#3b82f6');
-            root.style.setProperty('--user-bubble-text', '#ffffff');
+            root.style.setProperty('--user-bubble-bg', '#f5f5f5');
+            root.style.setProperty('--user-bubble-text', '#1a1a1a');
             root.style.setProperty('--bot-bubble-bg', '#f1f1f1');
             root.style.setProperty('--bot-bubble-text', '#111111');
         } else {
@@ -58,7 +58,7 @@ class ThemeManager {
 
             root.style.setProperty('--border-color', '#27272a');
 
-            root.style.setProperty('--user-bubble-bg', '#3b82f6');
+            root.style.setProperty('--user-bubble-bg', '#111111');
             root.style.setProperty('--user-bubble-text', '#ffffff');
             root.style.setProperty('--bot-bubble-bg', '#27272a');
             root.style.setProperty('--bot-bubble-text', '#ffffff');
