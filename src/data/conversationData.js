@@ -6,14 +6,15 @@ const conversationData = {
         id: 'welcome',
         botMessages: [
             "Hi! I'm Nick Braver 👋",
-            "I'm a Product Designer who's been crafting digital experiences for B2B, B2C e-commerce companies and startups since 2014.",
-            "What would you like to know about?"
+            "I'm a Product Designer who's been crafting digital experiences for B2B, B2C e-commerce companies and startups since 2014."
         ],
+        image: '/src/assets/hero-image.png',
         quickReplies: [
-            { id: 'about', label: '👋 About me', icon: '👋' },
-            { id: 'projects', label: '🎨 My work', icon: '🎨' },
-            { id: 'experience', label: '💼 Experience', icon: '💼' },
-            { id: 'reviews', label: '⭐ Reviews', icon: '⭐' }
+            { id: 'about', label: 'Tell me more about you', icon: '👋' },
+            { id: 'projects', label: 'I want to see your work', icon: '🎨' },
+            { id: 'experience', label: 'I want to know about your experience', icon: '💼' },
+            { id: 'reviews', label: 'I want to read some reviews about you', icon: '⭐' },
+            { id: 'credits', label: 'How was this built?', icon: '💻' }
         ]
     },
 
@@ -25,8 +26,8 @@ const conversationData = {
             "I've worked with companies like Indeed, Handsome (Splunk), Jet.com, and major brands like Nike and Audi."
         ],
         quickReplies: [
-            { id: 'projects', label: 'See my work', icon: '🎨' },
-            { id: 'experience', label: 'My experience', icon: '💼' },
+            { id: 'projects', label: 'I want to see your work', icon: '🎨' },
+            { id: 'experience', label: 'I want to know about your experience', icon: '💼' },
             { id: 'welcome', label: '← Back to menu', icon: '🏠' }
         ]
     },
@@ -34,16 +35,15 @@ const conversationData = {
     projects: {
         id: 'projects',
         botMessages: [
-            "Here are some of my featured projects:",
-            "Which one would you like to explore?"
+            "Here are some of my projects:"
         ],
         quickReplies: [
-            { id: 'project_digital_power_packs', label: 'Digital PowerPacks (2025)', icon: '🎮' },
-            { id: 'project_budget_tiers', label: 'Indeed Budget Tiers (2024)', icon: '💰' },
-            { id: 'project_activations', label: 'Campaign Creation (2023)', icon: '📱' },
-            { id: 'project_indeed_midmarket', label: 'Mid-market Tools (2022)', icon: '🛠️' },
-            { id: 'project_splunk', label: 'Splunk Design System (2020)', icon: '🎨' },
-            { id: 'project_jet', label: 'Jet.com Grocery (2018)', icon: '🛒' },
+            { id: 'project_digital_power_packs', label: 'I want to know about Digital PowerPacks (2025)', icon: '🎮' },
+            { id: 'project_budget_tiers', label: 'I want to know about Indeed Budget Tiers (2024)', icon: '💰' },
+            { id: 'project_activations', label: 'I want to know about Campaign Creation (2023)', icon: '📱' },
+            { id: 'project_indeed_midmarket', label: 'I want to know about Mid-market Tools (2022)', icon: '🛠️' },
+            { id: 'project_splunk', label: 'I want to know about Splunk Design System (2020)', icon: '🎨' },
+            { id: 'project_jet', label: 'I want to know about Jet.com Grocery (2018)', icon: '🛒' },
             { id: 'welcome', label: '← Back to menu', icon: '🏠' }
         ]
     },
@@ -52,12 +52,17 @@ const conversationData = {
     project_digital_power_packs: {
         id: 'project_digital_power_packs',
         botMessages: [
-            "🎮 Digital PowerPacks",
-            "GameStop · 2025 · New Product Launch"
+            "🎮 Digital PowerPacks"
+        ],
+        loadingMessages: [
+            "Opening Figma workspace and loading recent project files...",
+            "Parsing design system components and visual specifications...",
+            "Compiling product screenshots and user flow diagrams...",
+            "Gathering launch metrics and user feedback data..."
         ],
         detailPanelId: 'digital_power_packs',
         quickReplies: [
-            { id: 'project_digital_power_packs_details', label: 'Tell me more', icon: '📖' },
+            { id: 'project_digital_power_packs_details', label: 'Tell me more about it', icon: '📖' },
             { id: 'projects', label: '← Back to projects', icon: '🎨' }
         ]
     },
@@ -95,6 +100,12 @@ const conversationData = {
         botMessages: [
             "💰 Improving Sponsorship Rates with Budget Tiers",
             "Indeed · 2024 · Monetization & Growth"
+        ],
+        loadingMessages: [
+            "Accessing user research database and feedback transcripts...",
+            "Parsing qualitative insights and pain point analysis...",
+            "Loading A/B test results and conversion metrics...",
+            "Compiling revenue impact data and market adoption rates..."
         ],
         detailPanelId: 'budget_tiers',
         quickReplies: [
@@ -169,6 +180,12 @@ const conversationData = {
             "Indeed · 2023 · Monetization & Growth",
             "Streamlining the campaign creation process for job sponsors."
         ],
+        loadingMessages: [
+            "Retrieving campaign creation wireframes and prototypes...",
+            "Loading user journey maps and interaction flows...",
+            "Compiling usability test recordings and heatmaps...",
+            "Gathering design iteration history and feedback loops..."
+        ],
         detailPanelId: 'activations',
         quickReplies: [
             { id: 'projects', label: 'See other projects', icon: '🎨' },
@@ -183,6 +200,12 @@ const conversationData = {
             "🛠️ Helping Mid-market Employers",
             "Indeed · 2022 · Design Systems",
             "Building tools and systems to support mid-market employers on the Indeed platform."
+        ],
+        loadingMessages: [
+            "Accessing design system repository and component library...",
+            "Loading pattern documentation and usage guidelines...",
+            "Retrieving accessibility standards and implementation notes...",
+            "Compiling adoption metrics across product teams..."
         ],
         detailPanelId: 'indeed_midmarket',
         quickReplies: [
@@ -199,6 +222,12 @@ const conversationData = {
             "Handsome (for Splunk) · 2020",
             "Built a comprehensive design system for Splunk's enterprise products."
         ],
+        loadingMessages: [
+            "Dusting off archived design system files from 2020...",
+            "Retrieving component library specifications and tokens...",
+            "Loading enterprise product integrations and use cases...",
+            "Gathering stakeholder feedback and adoption stories..."
+        ],
         detailPanelId: 'splunk',
         quickReplies: [
             { id: 'projects', label: 'See other projects', icon: '🎨' },
@@ -213,6 +242,12 @@ const conversationData = {
             "🛒 Grocery Shopping Experience",
             "Jet.com · 2018 · Android & iOS",
             "Designed an intuitive grocery shopping experience for Jet.com's mobile apps."
+        ],
+        loadingMessages: [
+            "Dusting off mobile app designs from the archives (2018)...",
+            "Loading iOS and Android interface specifications...",
+            "Retrieving grocery shopping user flows and cart interactions...",
+            "Compiling app store performance data and ratings..."
         ],
         detailPanelId: 'jet',
         quickReplies: [
@@ -332,6 +367,30 @@ const conversationData = {
             "Check out my reviews on ADPList below 👇"
         ],
         showReviewsWidget: true,
+        quickReplies: [
+            { id: 'welcome', label: '← Back to menu', icon: '🏠' }
+        ]
+    },
+
+    // Credits
+    credits: {
+        id: 'credits',
+        botMessages: [
+            "This portfolio was vibe-coded and launched with AntiGravity. The design was crafted in Figma with love and attention to detail.",
+            "Want to see how it's built? Check out the source code on GitHub! 👇"
+        ],
+        quickReplies: [
+            { id: 'credits_github', label: 'View on GitHub', icon: '🔗' },
+            { id: 'welcome', label: '← Back to menu', icon: '🏠' }
+        ]
+    },
+
+    credits_github: {
+        id: 'credits_github',
+        externalLink: 'https://github.com/ShawTheHuman/portfolio',
+        botMessages: [
+            "Opening GitHub repository... 🔗"
+        ],
         quickReplies: [
             { id: 'welcome', label: '← Back to menu', icon: '🏠' }
         ]

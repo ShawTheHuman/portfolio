@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import '../styles/ProjectDetailPanel.css'
 import analytics from '../utils/analytics'
 
-const ProjectDetailPanel = ({ projectData, isOpen, isCollapsed, onToggleCollapse, onClose }) => {
+const ProjectDetailPanel = ({ projectData, isOpen, isCollapsed, isLoading, loadingMessages, onToggleCollapse, onClose }) => {
     const panelRef = useRef(null);
     const openTimeRef = useRef(null);
+    const [visibleLoadingMessages, setVisibleLoadingMessages] = useState([]);
 
     useEffect(() => {
         if (isOpen && !isCollapsed) {
@@ -22,6 +23,21 @@ const ProjectDetailPanel = ({ projectData, isOpen, isCollapsed, onToggleCollapse
             }
         };
     }, [isOpen, isCollapsed, projectData]);
+
+    // Progressive disclosure of loading messages
+    useEffect(() => {
+        if (isLoading && loadingMessages.length > 0) {
+            setVisibleLoadingMessages([]);
+
+            loadingMessages.forEach((msg, index) => {
+                setTimeout(() => {
+                    setVisibleLoadingMessages(prev => [...prev, msg]);
+                }, index * 600); // Show each message 600ms apart
+            });
+        } else {
+            setVisibleLoadingMessages([]);
+        }
+    }, [isLoading, loadingMessages]);
 
     const handleScroll = (e) => {
         const element = e.target;
@@ -42,7 +58,7 @@ const ProjectDetailPanel = ({ projectData, isOpen, isCollapsed, onToggleCollapse
         });
     };
 
-    if (!projectData) return null;
+    if (!projectData && !isLoading) return null;
 
     return (
         <>
@@ -53,7 +69,7 @@ const ProjectDetailPanel = ({ projectData, isOpen, isCollapsed, onToggleCollapse
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <polyline points="15 18 9 12 15 6"></polyline>
                         </svg>
-                        <span className="detail-panel-tab-text">{projectData.title}</span>
+                        <span className="detail-panel-tab-text">{projectData?.title || 'Project Details'}</span>
                     </div>
                 </div>
             )}
@@ -84,132 +100,159 @@ const ProjectDetailPanel = ({ projectData, isOpen, isCollapsed, onToggleCollapse
                 </div>
 
                 <div className="detail-panel-content">
-                    {/* Hero Image */}
-                    {projectData.hero && (
-                        <div className="detail-hero">
-                            <img src={projectData.hero} alt={projectData.title} />
-                        </div>
-                    )}
-
-                    {/* Header */}
-                    <div className="detail-header">
-                        <div className="detail-meta">
-                            <span className="detail-company">{projectData.company}</span>
-                            <span className="detail-separator">·</span>
-                            <span className="detail-year">{projectData.year}</span>
-                        </div>
-                        <h1 className="detail-title">{projectData.title}</h1>
-                        <p className="detail-role">{projectData.role} · {projectData.team}</p>
-
-                        {projectData.tags && (
-                            <div className="detail-tags">
-                                {projectData.tags.map((tag, index) => (
-                                    <span key={index} className="detail-tag">{tag}</span>
-                                ))}
+                    {/* Loading State - ChatGPT Style */}
+                    {isLoading && (
+                        <div className="detail-panel-loading">
+                            <div className="loading-container">
+                                <div className="loading-header">
+                                    <div className="loading-spinner"></div>
+                                    <span className="loading-title">Loading project details...</span>
+                                </div>
+                                <div className="loading-messages">
+                                    {visibleLoadingMessages.map((msg, index) => (
+                                        <div key={index} className="loading-message">
+                                            <svg className="loading-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            <span>{msg}</span>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        )}
-                    </div>
-
-                    {/* Overview */}
-                    {projectData.overview && (
-                        <section className="detail-section">
-                            <h2>Overview</h2>
-                            <p className="detail-text-large">{projectData.overview}</p>
-                        </section>
+                        </div>
                     )}
 
-                    {/* Problem */}
-                    {projectData.problem && (
-                        <section className="detail-section">
-                            <h2>The Problem</h2>
-                            <p>{projectData.problem}</p>
-                        </section>
-                    )}
+                    {/* Regular Content - Only show when not loading */}
+                    {!isLoading && projectData && (
+                        <>
+                            {/* Hero Image */}
+                            {projectData.hero && (
+                                <div className="detail-hero">
+                                    <img src={projectData.hero} alt={projectData.title} />
+                                </div>
+                            )}
 
-                    {/* Solution */}
-                    {projectData.solution && (
-                        <section className="detail-section">
-                            <h2>The Solution</h2>
-                            <p>{projectData.solution}</p>
-                        </section>
-                    )}
+                            {/* Header */}
+                            <div className="detail-header">
+                                <div className="detail-meta">
+                                    <span className="detail-company">{projectData.company}</span>
+                                    <span className="detail-separator">·</span>
+                                    <span className="detail-year">{projectData.year}</span>
+                                </div>
+                                <h1 className="detail-title">{projectData.title}</h1>
+                                <p className="detail-role">{projectData.role} · {projectData.team}</p>
 
-                    {/* Key Features */}
-                    {projectData.features && projectData.features.length > 0 && (
-                        <section className="detail-section">
-                            <h2>Key Features</h2>
-                            <ul className="detail-list">
-                                {projectData.features.map((feature, index) => (
-                                    <li key={index}>{feature}</li>
-                                ))}
-                            </ul>
-                        </section>
-                    )}
-
-                    {/* Impact */}
-                    {projectData.impact && projectData.impact.length > 0 && (
-                        <section className="detail-section">
-                            <h2>Impact</h2>
-                            <div className="detail-impact-grid">
-                                {projectData.impact.map((item, index) => (
-                                    <div key={index} className="detail-impact-item">
-                                        <div className="detail-impact-metric">{item.metric}</div>
-                                        <div className="detail-impact-label">{item.label}</div>
+                                {projectData.tags && (
+                                    <div className="detail-tags">
+                                        {projectData.tags.map((tag, index) => (
+                                            <span key={index} className="detail-tag">{tag}</span>
+                                        ))}
                                     </div>
-                                ))}
+                                )}
                             </div>
-                        </section>
-                    )}
 
-                    {/* Process */}
-                    {projectData.process && projectData.process.length > 0 && (
-                        <section className="detail-section">
-                            <h2>Process</h2>
-                            <ul className="detail-list">
-                                {projectData.process.map((step, index) => (
-                                    <li key={index}>{step}</li>
-                                ))}
-                            </ul>
-                        </section>
-                    )}
+                            {/* Overview */}
+                            {projectData.overview && (
+                                <section className="detail-section">
+                                    <h2>Overview</h2>
+                                    <p className="detail-text-large">{projectData.overview}</p>
+                                </section>
+                            )}
 
-                    {/* Testimonials */}
-                    {projectData.testimonials && projectData.testimonials.length > 0 && (
-                        <section className="detail-section">
-                            <h2>Testimonials</h2>
-                            {projectData.testimonials.map((testimonial, index) => (
-                                <blockquote key={index} className="detail-testimonial">
-                                    <p>"{testimonial.quote}"</p>
-                                    <cite>— {testimonial.author}, {testimonial.title}</cite>
-                                </blockquote>
-                            ))}
-                        </section>
-                    )}
+                            {/* Problem */}
+                            {projectData.problem && (
+                                <section className="detail-section">
+                                    <h2>The Problem</h2>
+                                    <p>{projectData.problem}</p>
+                                </section>
+                            )}
 
-                    {/* Links */}
-                    {projectData.links && projectData.links.length > 0 && (
-                        <section className="detail-section">
-                            <h2>Links</h2>
-                            <div className="detail-links">
-                                {projectData.links.map((link, index) => (
-                                    <a
-                                        key={index}
-                                        href={link.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="detail-link"
-                                        onClick={() => handleLinkClick(link)}
-                                    >
-                                        {link.label}
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                            <polyline points="15 3 21 3 21 9"></polyline>
-                                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                                        </svg>
-                                    </a>
-                                ))}
-                            </div>
-                        </section>
+                            {/* Solution */}
+                            {projectData.solution && (
+                                <section className="detail-section">
+                                    <h2>The Solution</h2>
+                                    <p>{projectData.solution}</p>
+                                </section>
+                            )}
+
+                            {/* Key Features */}
+                            {projectData.features && projectData.features.length > 0 && (
+                                <section className="detail-section">
+                                    <h2>Key Features</h2>
+                                    <ul className="detail-list">
+                                        {projectData.features.map((feature, index) => (
+                                            <li key={index}>{feature}</li>
+                                        ))}
+                                    </ul>
+                                </section>
+                            )}
+
+                            {/* Impact */}
+                            {projectData.impact && projectData.impact.length > 0 && (
+                                <section className="detail-section">
+                                    <h2>Impact</h2>
+                                    <div className="detail-impact-grid">
+                                        {projectData.impact.map((item, index) => (
+                                            <div key={index} className="detail-impact-item">
+                                                <div className="detail-impact-metric">{item.metric}</div>
+                                                <div className="detail-impact-label">{item.label}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+                            )}
+
+                            {/* Process */}
+                            {projectData.process && projectData.process.length > 0 && (
+                                <section className="detail-section">
+                                    <h2>Process</h2>
+                                    <ul className="detail-list">
+                                        {projectData.process.map((step, index) => (
+                                            <li key={index}>{step}</li>
+                                        ))}
+                                    </ul>
+                                </section>
+                            )}
+
+                            {/* Testimonials */}
+                            {projectData.testimonials && projectData.testimonials.length > 0 && (
+                                <section className="detail-section">
+                                    <h2>Testimonials</h2>
+                                    {projectData.testimonials.map((testimonial, index) => (
+                                        <blockquote key={index} className="detail-testimonial">
+                                            <p>"{testimonial.quote}"</p>
+                                            <cite>— {testimonial.author}, {testimonial.title}</cite>
+                                        </blockquote>
+                                    ))}
+                                </section>
+                            )}
+
+                            {/* Links */}
+                            {projectData.links && projectData.links.length > 0 && (
+                                <section className="detail-section">
+                                    <h2>Links</h2>
+                                    <div className="detail-links">
+                                        {projectData.links.map((link, index) => (
+                                            <a
+                                                key={index}
+                                                href={link.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="detail-link"
+                                                onClick={() => handleLinkClick(link)}
+                                            >
+                                                {link.label}
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                                </svg>
+                                            </a>
+                                        ))}
+                                    </div>
+                                </section>
+                            )}
+                        </>
                     )}
                 </div>
             </div>

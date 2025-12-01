@@ -64,12 +64,8 @@
 }
 
 .quick-replies-container {
-    padding: 1rem 1.5rem 1.5rem;
-    background: linear-gradient(to top,
-            var(--bg-primary) 70%,
-            transparent);
-    position: sticky;
-    bottom: 0;
+    padding: 0.5rem 1.5rem 1.5rem;
+    position: relative;
     z-index: 10;
 }
 

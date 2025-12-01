@@ -18,6 +18,8 @@ const ChatInterface = () => {
     const [isPanelOpen, setIsPanelOpen] = useState(false);
     const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
     const [activeProjectId, setActiveProjectId] = useState(null);
+    const [isPanelLoading, setIsPanelLoading] = useState(false);
+    const [panelLoadingMessages, setPanelLoadingMessages] = useState([]);
 
     const messagesEndRef = useRef(null);
     const chatContainerRef = useRef(null);
@@ -145,51 +147,102 @@ const ChatInterface = () => {
         setIsTyping(true);
         setCurrentNode(nodeId);
 
-        // Handle Detail Panel Trigger
-        if (node.detailPanelId) {
+        // If there are loading messages for panel opening, show them IN THE PANEL
+        if (node.loadingMessages && node.detailPanelId) {
+            // Open the panel immediately in loading state
             setActiveProjectId(node.detailPanelId);
             setIsPanelOpen(true);
             setIsPanelCollapsed(false);
-        }
+            setIsPanelLoading(true);
+            setPanelLoadingMessages(node.loadingMessages);
 
-        // Simulate typing delay
-        setTimeout(() => {
-            const newBotMessages = node.botMessages.map((msg, index) => ({
-                id: `${nodeId}_${Date.now()}_${index}`,
-                type: 'bot',
-                content: msg,
-                timestamp: new Date().toISOString(),
-                nodeId: nodeId,
-                image: index === node.botMessages.length - 1 ? node.image : null,
-                isClickable: false // Bot messages should not be clickable
-            }));
-
-            setMessages(prev => {
-                // Make only previous user messages clickable for navigation
-                const updatedPrevMessages = prev.map(msg => ({
-                    ...msg,
-                    isClickable: msg.type === 'user'
+            // Show bot messages in chat
+            setTimeout(() => {
+                const newBotMessages = node.botMessages.map((msg, index) => ({
+                    id: `${nodeId}_${Date.now()}_${index}`,
+                    type: 'bot',
+                    content: msg,
+                    timestamp: new Date().toISOString(),
+                    nodeId: nodeId,
+                    image: index === node.botMessages.length - 1 ? node.image : null,
+                    isClickable: false
                 }));
-                return [...updatedPrevMessages, ...newBotMessages];
-            });
 
-            setIsTyping(false);
+                setMessages(prev => {
+                    const updatedPrevMessages = prev.map(msg => ({
+                        ...msg,
+                        isClickable: msg.type === 'user'
+                    }));
+                    return [...updatedPrevMessages, ...newBotMessages];
+                });
 
-            // Track in analytics
-            newBotMessages.forEach(msg => {
-                analytics.trackMessageReceived(msg.content, msg.id);
-            });
+                setIsTyping(false);
 
-            // Handle external links
-            if (node.externalLink) {
-                window.open(node.externalLink, '_blank');
+                // Track in analytics
+                newBotMessages.forEach(msg => {
+                    analytics.trackMessageReceived(msg.content, msg.id);
+                });
+
+                // After chat messages, finish loading the panel
+                // Total loading time: 2.5s to show all loading messages progressively
+                setTimeout(() => {
+                    setIsPanelLoading(false);
+                    setPanelLoadingMessages([]);
+                }, 2500);
+
+                // Show quick replies
+                setTimeout(() => {
+                    setShowQuickReplies(true);
+                }, 300);
+            }, 800);
+        } else {
+            // No loading messages, proceed normally
+            // Handle Detail Panel Trigger
+            if (node.detailPanelId) {
+                setActiveProjectId(node.detailPanelId);
+                setIsPanelOpen(true);
+                setIsPanelCollapsed(false);
             }
 
-            // Show quick replies
+            // Simulate typing delay
             setTimeout(() => {
-                setShowQuickReplies(true);
-            }, 300);
-        }, 800);
+                const newBotMessages = node.botMessages.map((msg, index) => ({
+                    id: `${nodeId}_${Date.now()}_${index}`,
+                    type: 'bot',
+                    content: msg,
+                    timestamp: new Date().toISOString(),
+                    nodeId: nodeId,
+                    image: index === node.botMessages.length - 1 ? node.image : null,
+                    isClickable: false // Bot messages should not be clickable
+                }));
+
+                setMessages(prev => {
+                    // Make only previous user messages clickable for navigation
+                    const updatedPrevMessages = prev.map(msg => ({
+                        ...msg,
+                        isClickable: msg.type === 'user'
+                    }));
+                    return [...updatedPrevMessages, ...newBotMessages];
+                });
+
+                setIsTyping(false);
+
+                // Track in analytics
+                newBotMessages.forEach(msg => {
+                    analytics.trackMessageReceived(msg.content, msg.id);
+                });
+
+                // Handle external links
+                if (node.externalLink) {
+                    window.open(node.externalLink, '_blank');
+                }
+
+                // Show quick replies
+                setTimeout(() => {
+                    setShowQuickReplies(true);
+                }, 300);
+            }, 800);
+        }
     };
 
     const handleMessageClick = (messageId, timestamp) => {
@@ -264,23 +317,25 @@ const ChatInterface = () => {
                         </div>
                     )}
 
+                    {showQuickReplies && currentNodeData?.quickReplies && (
+                        <div className="quick-replies-container">
+                            <QuickReply
+                                replies={currentNodeData.quickReplies}
+                                onReplyClick={handleQuickReply}
+                            />
+                        </div>
+                    )}
+
                     <div ref={messagesEndRef} />
                 </div>
-
-                {showQuickReplies && currentNodeData?.quickReplies && (
-                    <div className="quick-replies-container">
-                        <QuickReply
-                            replies={currentNodeData.quickReplies}
-                            onReplyClick={handleQuickReply}
-                        />
-                    </div>
-                )}
             </div>
 
             <ProjectDetailPanel
                 projectData={activeProjectId ? projectDetails[activeProjectId] : null}
                 isOpen={isPanelOpen}
                 isCollapsed={isPanelCollapsed}
+                isLoading={isPanelLoading}
+                loadingMessages={panelLoadingMessages}
                 onToggleCollapse={togglePanelCollapse}
                 onClose={closePanel}
             />
