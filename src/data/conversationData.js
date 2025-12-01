@@ -34,17 +34,66 @@ const conversationData = {
 
     projects: {
         id: 'projects',
+        displayMode: 'carousel',
         botMessages: [
             "Here are some of my projects:"
         ],
         quickReplies: [
-            { id: 'project_digital_power_packs', label: 'I want to know about Digital PowerPacks (2025)', icon: '🎮' },
-            { id: 'project_budget_tiers', label: 'I want to know about Indeed Budget Tiers (2024)', icon: '💰' },
-            { id: 'project_activations', label: 'I want to know about Campaign Creation (2023)', icon: '📱' },
-            { id: 'project_indeed_midmarket', label: 'I want to know about Mid-market Tools (2022)', icon: '🛠️' },
-            { id: 'project_splunk', label: 'I want to know about Splunk Design System (2020)', icon: '🎨' },
-            { id: 'project_jet', label: 'I want to know about Jet.com Grocery (2018)', icon: '🛒' },
-            { id: 'welcome', label: '← Back to menu', icon: '🏠' }
+            {
+                id: 'project_digital_power_packs',
+                label: 'Digital PowerPacks',
+                title: 'Digital PowerPacks',
+                tags: ['2025', 'Product Design', 'Web3'],
+                image: '/assets/digital_power_packs_bg.png',
+                icon: '🎮'
+            },
+            {
+                id: 'project_budget_tiers',
+                label: 'Indeed Budget Tiers',
+                title: 'Indeed Budget Tiers',
+                tags: ['2024', 'UX Research', 'B2B'],
+                image: '/assets/budget_tiers_ui.png',
+                icon: '💰'
+            },
+            {
+                id: 'project_activations',
+                label: 'Campaign Creation',
+                title: 'Campaign Creation',
+                tags: ['2023', 'Interaction Design', 'Mobile'],
+                image: '/assets/hero-image.png',
+                icon: '📱'
+            },
+            {
+                id: 'project_indeed_midmarket',
+                label: 'Mid-market Tools',
+                title: 'Mid-market Tools',
+                tags: ['2022', 'Enterprise', 'SaaS'],
+                image: '/assets/hero-image.png',
+                icon: '🛠️'
+            },
+            {
+                id: 'project_splunk',
+                label: 'Splunk Design System',
+                title: 'Splunk Design System',
+                tags: ['2020', 'Design Systems', 'UI Kit'],
+                image: '/assets/splunk_components.png',
+                icon: '🎨'
+            },
+            {
+                id: 'project_jet',
+                label: 'Jet.com Grocery',
+                title: 'Jet.com Grocery',
+                tags: ['2018', 'Mobile App', 'eCommerce'],
+                image: '/assets/jet_final_ui_implementation.png',
+                icon: '🛒'
+            },
+            {
+                id: 'welcome',
+                label: '← Back to menu',
+                title: 'Back to Menu',
+                tags: ['Navigation', 'Home'],
+                icon: '🏠'
+            }
         ]
     },
 
