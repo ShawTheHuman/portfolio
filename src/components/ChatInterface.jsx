@@ -3,6 +3,7 @@ import MessageBubble from './MessageBubble'
 import QuickReply from './QuickReply'
 import TypingIndicator from './TypingIndicator'
 import ProjectDetailPanel from './ProjectDetailPanel'
+import ProjectCarousel from './ProjectCarousel'
 import conversationData from '../data/conversationData'
 import projectDetails from '../data/projectDetails'
 import analytics from '../utils/analytics'
@@ -285,48 +286,58 @@ const ChatInterface = () => {
     return (
         <div className={`chat-interface ${isPanelOpen && !isPanelCollapsed ? 'split-view' : ''}`}>
             <div className={`chat-container ${isPanelOpen && !isPanelCollapsed ? 'with-panel' : ''}`} ref={chatContainerRef}>
-                <div className="messages-container">
-                    {messages.map((message) => (
-                        <MessageBubble
-                            key={message.id}
-                            type={message.type}
-                            content={message.content}
-                            timestamp={message.timestamp}
-                            image={message.image}
-                            messageId={message.id}
-                            isClickable={message.isClickable}
-                            onClick={handleMessageClick}
-                        />
-                    ))}
-
-                    {isTyping && <TypingIndicator />}
-
-                    {/* Reviews Widget */}
-                    {currentNodeData?.showReviewsWidget && !isTyping && (
-                        <div className="reviews-widget-container">
-                            <div className="reviews-widget-embed">
-                                <iframe
-                                    src="https://adplist.org/widgets/reviews?src=nick-braver"
-                                    title="All Reviews"
-                                    width="100%"
-                                    height="560px"
-                                    loading="lazy"
-                                    style={{ border: 0, borderRadius: '16px' }}
+                <div className="chat-scroll-wrapper">
+                    <div className="chat-content-wrapper">
+                        <div className="messages-container">
+                            {messages.map((message) => (
+                                <MessageBubble
+                                    key={message.id}
+                                    type={message.type}
+                                    content={message.content}
+                                    timestamp={message.timestamp}
+                                    image={message.image}
+                                    messageId={message.id}
+                                    isClickable={message.isClickable}
+                                    onClick={handleMessageClick}
                                 />
-                            </div>
-                        </div>
-                    )}
+                            ))}
 
-                    {showQuickReplies && currentNodeData?.quickReplies && (
-                        <div className="quick-replies-container">
-                            <QuickReply
-                                replies={currentNodeData.quickReplies}
-                                onReplyClick={handleQuickReply}
-                            />
-                        </div>
-                    )}
+                            {isTyping && <TypingIndicator />}
 
-                    <div ref={messagesEndRef} />
+                            {/* Reviews Widget */}
+                            {currentNodeData?.showReviewsWidget && !isTyping && (
+                                <div className="reviews-widget-container">
+                                    <div className="reviews-widget-embed">
+                                        <iframe
+                                            src="https://adplist.org/widgets/reviews?src=nick-braver"
+                                            title="All Reviews"
+                                            width="100%"
+                                            height="560px"
+                                            loading="lazy"
+                                            style={{ border: 0, borderRadius: '16px' }}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
+                            {showQuickReplies && currentNodeData?.quickReplies && (
+                                currentNodeData.displayMode === 'carousel' ? (
+                                    <ProjectCarousel
+                                        items={currentNodeData.quickReplies}
+                                        onItemClick={handleQuickReply}
+                                    />
+                                ) : (
+                                    <div className="quick-replies-container">
+                                        <QuickReply
+                                            replies={currentNodeData.quickReplies}
+                                            onReplyClick={handleQuickReply}
+                                        />
+                                    </div>
+                                )
+                            )}
+                            <div ref={messagesEndRef} />
+                        </div>
+                    </div>
                 </div>
             </div>
 
