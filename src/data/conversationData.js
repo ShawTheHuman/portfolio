@@ -8,7 +8,7 @@ const conversationData = {
             "Hi! I'm Nick Braver 👋",
             "I'm a Product Designer who's been crafting digital experiences for B2B, B2C e-commerce companies and startups since 2014."
         ],
-        image: '/src/assets/hero-image.png',
+        image: './assets/hero-image.png',
         quickReplies: [
             { id: 'about', label: 'Tell me more about you', icon: '👋' },
             { id: 'projects', label: 'I want to see your work', icon: '🎨' },
@@ -74,7 +74,7 @@ const conversationData = {
             "This innovative product bridges the gap between digital collectibles and physical memorabilia.",
             "Users can purchase digital packs and reveal cards digitally, then receive physical PSA-graded cards."
         ],
-        image: '/src/assets/digital_power_packs_bg.png',
+        image: './assets/digital_power_packs_bg.png',
         quickReplies: [
             { id: 'project_digital_power_packs_link', label: 'View launch post', icon: '🔗' },
             { id: 'projects', label: 'See other projects', icon: '🎨' },
@@ -137,7 +137,7 @@ const conversationData = {
             "The framework provides clear guidance on recommended budget levels based on job characteristics and market data.",
             "This helps employers make informed decisions about their job sponsorship investments."
         ],
-        image: '/src/assets/budget_tiers_ui.png',
+        image: '/assets/budget_tiers_ui.png',
         quickReplies: [
             { id: 'project_budget_tiers_impact', label: 'What was the impact?', icon: '📊' },
             { id: 'project_budget_tiers_testimonial', label: 'Testimonial', icon: '💬' },
