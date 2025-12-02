@@ -1,4 +1,5 @@
 # Dependencies
+node_modules/
 .pnp
 .pnp.js
 
@@ -28,4 +29,15 @@ yarn-error.log*
 # Archives
 Archive.zip
 
+# Config
 .config/
+
+# Old ESLint config (replaced by eslint.config.js)
+.eslintrc.cjs
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
