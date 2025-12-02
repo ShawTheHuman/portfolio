@@ -4,6 +4,9 @@ dist
 .git
 .gitignore
 .DS_Store
+.config
+.env
+.env.*
 *.md
 Archive.zip
 walkthrough.md
