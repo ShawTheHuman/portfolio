@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--header-height);
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -13,6 +13,7 @@
     z-index: 1000;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    font-weight: 900;
 }
 
 body.panel-open .header {
@@ -20,9 +21,9 @@ body.panel-open .header {
 }
 
 .header-logo {
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
     color: var(--text-primary);
     text-decoration: none;
     transition: color var(--transition-fast);

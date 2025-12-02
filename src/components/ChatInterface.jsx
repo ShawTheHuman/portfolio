@@ -293,60 +293,6 @@ const ChatInterface = () => {
         setActiveProjectId(null);
     };
 
-    const handleUndo = (messageId, selectedReply = null) => {
-        // Find the index of the message being undone
-        const undoIndex = messages.findIndex(msg => msg.id === messageId);
-        if (undoIndex === -1) return;
-
-        // Get the node ID for this message
-        const targetNodeId = messages[undoIndex].nodeId;
-
-        // Remove all messages after this one
-        const newMessages = messages.slice(0, undoIndex + 1);
-
-        // Track undo action
-        analytics.log('undo_clicked', {
-            nodeId: targetNodeId,
-            messageId: messageId,
-            selectedReply: selectedReply?.id
-        });
-
-        if (selectedReply) {
-            // If a reply was selected, add it as a user message and navigate
-            const userMessage = {
-                id: `user_${Date.now()}`,
-                type: 'user',
-                content: selectedReply.label,
-                timestamp: new Date().toISOString(),
-                nodeId: targetNodeId,
-                isClickable: false
-            };
-
-            setMessages([...newMessages, userMessage]);
-            setCurrentNode(targetNodeId);
-            setShowQuickReplies(false);
-
-            // Close the detail panel for certain nodes
-            if (targetNodeId === 'projects' || targetNodeId === 'welcome') {
-                setIsPanelOpen(false);
-            }
-
-            // Navigate to the selected reply's node
-            setTimeout(() => {
-                navigateToNode(selectedReply.id);
-            }, 500);
-        } else {
-            // Just undo, show quick replies again
-            setMessages(newMessages);
-            setCurrentNode(targetNodeId);
-            setShowQuickReplies(true);
-
-            // Check if we should close the panel when undoing
-            if (targetNodeId === 'projects' || targetNodeId === 'welcome') {
-                setIsPanelOpen(false);
-            }
-        }
-    };
 
     const currentNodeData = conversationData[currentNode];
 
@@ -357,12 +303,6 @@ const ChatInterface = () => {
                     <div className="chat-content-wrapper">
                         <div className="messages-container">
                             {messages.map((message, index) => {
-                                // Check if this is a user message
-                                const isUserMessage = message.type === 'user';
-                                // Get the node data for the message to find available quick replies
-                                const nodeData = conversationData[message.nodeId];
-                                const hasQuickReplies = isUserMessage && nodeData?.quickReplies && nodeData.quickReplies.length > 0;
-
                                 return (
                                     <MessageBubble
                                         key={message.id}
@@ -373,9 +313,6 @@ const ChatInterface = () => {
                                         messageId={message.id}
                                         isClickable={message.isClickable}
                                         onClick={handleMessageClick}
-                                        hasQuickReplies={hasQuickReplies}
-                                        quickReplies={hasQuickReplies ? nodeData.quickReplies : null}
-                                        onUndo={isUserMessage ? handleUndo : null}
                                     />
                                 );
                             })}
