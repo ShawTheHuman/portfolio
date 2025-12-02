@@ -18,7 +18,6 @@ RUN echo "=== Installing dependencies for build ===" && \
 # Copy source files needed for build
 COPY index.html ./
 COPY vite.config.js ./
-COPY public ./public
 COPY src ./src
 
 # Verify required files exist
