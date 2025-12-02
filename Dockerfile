@@ -43,6 +43,13 @@ RUN echo "=== Verifying build output ===" && \
     echo "✓ Build artifacts verified" && \
     ls -lh dist/
 
+# Clean up to reduce layer size
+RUN echo "=== Cleaning up build artifacts ===" && \
+    rm -rf node_modules && \
+    rm -rf src && \
+    rm -rf public && \
+    echo "✓ Cleanup completed"
+
 # Production stage
 FROM node:20-alpine
 
