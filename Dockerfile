@@ -13,7 +13,6 @@ RUN npm ci
 # Copy source files needed for build
 COPY index.html ./
 COPY vite.config.js ./
-COPY eslint.config.js ./
 COPY public ./public
 COPY src ./src
 
