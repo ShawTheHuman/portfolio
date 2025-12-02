@@ -42,7 +42,7 @@ const conversationData = {
                 id: 'project_digital_power_packs',
                 label: 'GameStop Power Packs',
                 title: 'GameStop Power Packs',
-                tags: ['2025', 'Product Design', 'Web3'],
+                tags: ['2025', '0 to 1 launch', 'eCommerce', 'B2C'],
                 image: './assets/digital_power_packs_bg.png',
                 icon: '🎮'
             },
@@ -50,7 +50,7 @@ const conversationData = {
                 id: 'project_gamestop_redesign',
                 label: 'GameStop Redesign',
                 title: 'GameStop Redesign',
-                tags: ['2024', 'UX Design', 'Mobile'],
+                tags: ['2025', 'Feature Improvements', 'eCommerce', 'B2C'],
                 image: './assets/gamestop_redesign.png',
                 icon: '🎨'
             },
@@ -58,7 +58,7 @@ const conversationData = {
                 id: 'project_indeed_midmarket',
                 label: 'Indeed Mid-Market',
                 title: 'Indeed Mid-Market',
-                tags: ['2022', 'Enterprise', 'SaaS'],
+                tags: ['2023', 'Enterprise', 'SaaS', 'B2B'],
                 image: './assets/indeed_campaigns_hero.png',
                 icon: '🛠️'
             },

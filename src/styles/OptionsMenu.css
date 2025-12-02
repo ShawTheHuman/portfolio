@@ -7,8 +7,7 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
+    border: none;
     color: var(--text-primary);
     display: flex;
     align-items: center;

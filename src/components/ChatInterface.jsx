@@ -47,6 +47,23 @@ const ChatInterface = () => {
             // Start fresh conversation
             startConversation('welcome');
         }
+
+        // Listen for reset event
+        const handleReset = () => {
+            sessionStorage.removeItem('chat_messages');
+            sessionStorage.removeItem('current_node');
+            sessionStorage.removeItem('panel_state');
+
+            setMessages([]);
+            setCurrentNode('welcome');
+            setIsPanelOpen(false);
+            setIsPanelCollapsed(false);
+            setActiveProjectId(null);
+            startConversation('welcome');
+        };
+
+        window.addEventListener('reset-chat', handleReset);
+        return () => window.removeEventListener('reset-chat', handleReset);
     }, []);
 
     // Save to session storage
