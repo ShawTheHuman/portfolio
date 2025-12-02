@@ -10,99 +10,37 @@ import analytics from '../utils/analytics'
 import '../styles/ChatInterface.css'
 
 const ChatInterface = () => {
-    const [messages, setMessages] = useState([]);
-    const [currentNode, setCurrentNode] = useState('welcome');
+    const [messages, setMessages] = useState(() => {
+        const saved = sessionStorage.getItem('chat_messages');
+        return saved ? JSON.parse(saved) : [];
+    });
+    const [currentNode, setCurrentNode] = useState(() => {
+        return sessionStorage.getItem('current_node') || 'welcome';
+    });
     const [isTyping, setIsTyping] = useState(false);
-    const [showQuickReplies, setShowQuickReplies] = useState(false);
+    const [showQuickReplies, setShowQuickReplies] = useState(() => {
+        const saved = sessionStorage.getItem('chat_messages');
+        return !!saved; // Show if we have messages loaded
+    });
 
     // Detail Panel State
-    const [isPanelOpen, setIsPanelOpen] = useState(false);
-    const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
-    const [activeProjectId, setActiveProjectId] = useState(null);
+    const [isPanelOpen, setIsPanelOpen] = useState(() => {
+        const saved = sessionStorage.getItem('panel_state');
+        return saved ? JSON.parse(saved).isOpen : false;
+    });
+    const [isPanelCollapsed, setIsPanelCollapsed] = useState(() => {
+        const saved = sessionStorage.getItem('panel_state');
+        return saved ? JSON.parse(saved).isCollapsed : false;
+    });
+    const [activeProjectId, setActiveProjectId] = useState(() => {
+        const saved = sessionStorage.getItem('panel_state');
+        return saved ? JSON.parse(saved).projectId : null;
+    });
     const [isPanelLoading, setIsPanelLoading] = useState(false);
     const [panelLoadingMessages, setPanelLoadingMessages] = useState([]);
 
     const messagesEndRef = useRef(null);
     const chatContainerRef = useRef(null);
-
-    // Initialize conversation
-    useEffect(() => {
-        // Load from session storage if available
-        const savedMessages = sessionStorage.getItem('chat_messages');
-        const savedNode = sessionStorage.getItem('current_node');
-        const savedPanelState = sessionStorage.getItem('panel_state');
-
-        if (savedMessages && savedNode) {
-            setMessages(JSON.parse(savedMessages));
-            setCurrentNode(savedNode);
-            setShowQuickReplies(true);
-
-            if (savedPanelState) {
-                const { isOpen, isCollapsed, projectId } = JSON.parse(savedPanelState);
-                setIsPanelOpen(isOpen);
-                setIsPanelCollapsed(isCollapsed);
-                setActiveProjectId(projectId);
-            }
-        } else {
-            // Start fresh conversation
-            startConversation('welcome');
-        }
-
-        // Listen for reset event
-        const handleReset = () => {
-            sessionStorage.removeItem('chat_messages');
-            sessionStorage.removeItem('current_node');
-            sessionStorage.removeItem('panel_state');
-
-            setMessages([]);
-            setCurrentNode('welcome');
-            setIsPanelOpen(false);
-            setIsPanelCollapsed(false);
-            setActiveProjectId(null);
-            startConversation('welcome');
-        };
-
-        window.addEventListener('reset-chat', handleReset);
-        return () => window.removeEventListener('reset-chat', handleReset);
-    }, []);
-
-    // Save to session storage
-    useEffect(() => {
-        if (messages.length > 0) {
-            sessionStorage.setItem('chat_messages', JSON.stringify(messages));
-            sessionStorage.setItem('current_node', currentNode);
-            sessionStorage.setItem('panel_state', JSON.stringify({
-                isOpen: isPanelOpen,
-                isCollapsed: isPanelCollapsed,
-                projectId: activeProjectId
-            }));
-        }
-    }, [messages, currentNode, isPanelOpen, isPanelCollapsed, activeProjectId]);
-
-    // Toggle body class when panel opens/closes to resize header
-    useEffect(() => {
-        if (isPanelOpen && !isPanelCollapsed) {
-            document.body.classList.add('panel-open');
-        } else {
-            document.body.classList.remove('panel-open');
-        }
-        return () => {
-            document.body.classList.remove('panel-open');
-        };
-    }, [isPanelOpen, isPanelCollapsed]);
-
-    // Auto-scroll to bottom
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages, isTyping, showQuickReplies]);
-
-    const scrollToBottom = (smooth = true) => {
-        if (smooth) {
-            messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        } else {
-            messagesEndRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' });
-        }
-    };
 
     const startConversation = (nodeId) => {
         const node = conversationData[nodeId];
@@ -144,6 +82,71 @@ const ChatInterface = () => {
         }, 800);
     };
 
+    // Initialize conversation
+    useEffect(() => {
+        if (messages.length === 0) {
+            setTimeout(() => startConversation('welcome'), 0);
+        }
+
+        // Listen for reset event
+        const handleReset = () => {
+            sessionStorage.removeItem('chat_messages');
+            sessionStorage.removeItem('current_node');
+            sessionStorage.removeItem('panel_state');
+
+            setMessages([]);
+            setCurrentNode('welcome');
+            setIsPanelOpen(false);
+            setIsPanelCollapsed(false);
+            setActiveProjectId(null);
+            setTimeout(() => startConversation('welcome'), 0);
+        };
+
+        window.addEventListener('reset-chat', handleReset);
+        return () => window.removeEventListener('reset-chat', handleReset);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    // Save to session storage
+    useEffect(() => {
+        if (messages.length > 0) {
+            sessionStorage.setItem('chat_messages', JSON.stringify(messages));
+            sessionStorage.setItem('current_node', currentNode);
+            sessionStorage.setItem('panel_state', JSON.stringify({
+                isOpen: isPanelOpen,
+                isCollapsed: isPanelCollapsed,
+                projectId: activeProjectId
+            }));
+        }
+    }, [messages, currentNode, isPanelOpen, isPanelCollapsed, activeProjectId]);
+
+    // Toggle body class when panel opens/closes to resize header
+    useEffect(() => {
+        if (isPanelOpen && !isPanelCollapsed) {
+            document.body.classList.add('panel-open');
+        } else {
+            document.body.classList.remove('panel-open');
+        }
+        return () => {
+            document.body.classList.remove('panel-open');
+        };
+    }, [isPanelOpen, isPanelCollapsed]);
+
+    const scrollToBottom = (smooth = true) => {
+        if (smooth) {
+            messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        } else {
+            messagesEndRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' });
+        }
+    };
+
+    // Auto-scroll to bottom
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages, isTyping, showQuickReplies]);
+
+
+
     const handleQuickReply = (reply) => {
         // Track selection
         analytics.trackQuickReplySelected(reply.id, reply.label);
@@ -151,7 +154,7 @@ const ChatInterface = () => {
 
         // Add user message
         const userMessage = {
-            id: `user_${Date.now()}`,
+            id: `user_${new Date().getTime()}`,
             type: 'user',
             content: reply.label,
             timestamp: new Date().toISOString(),

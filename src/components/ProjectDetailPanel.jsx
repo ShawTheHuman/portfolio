@@ -28,7 +28,8 @@ const ProjectDetailPanel = ({ projectData, isOpen, isCollapsed, isLoading, loadi
     useEffect(() => {
         const timers = [];
         if (isLoading && loadingMessages.length > 0) {
-            setVisibleLoadingMessages([]);
+            // Use setTimeout to avoid synchronous state update warning
+            setTimeout(() => setVisibleLoadingMessages([]), 0);
 
             loadingMessages.forEach((msg, index) => {
                 const timer = setTimeout(() => {
@@ -37,7 +38,7 @@ const ProjectDetailPanel = ({ projectData, isOpen, isCollapsed, isLoading, loadi
                 timers.push(timer);
             });
         } else {
-            setVisibleLoadingMessages([]);
+            setTimeout(() => setVisibleLoadingMessages([]), 0);
         }
 
         return () => {
