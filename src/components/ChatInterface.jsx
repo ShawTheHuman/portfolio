@@ -319,7 +319,7 @@ const ChatInterface = () => {
                 <div className="chat-scroll-wrapper">
                     <div className="chat-content-wrapper">
                         <div className="messages-container">
-                            {messages.map((message, index) => {
+                            {messages.map((message) => {
                                 return (
                                     <MessageBubble
                                         key={message.id}

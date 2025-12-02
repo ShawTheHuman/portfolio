@@ -121,9 +121,9 @@ const conversationData = {
             "🎮 Digital PowerPacks"
         ],
         loadingMessages: [
-            "Opening Figma workspace and loading recent project files...",
-            "Parsing design system components and visual specifications...",
-            "Compiling product screenshots and user flow diagrams...",
+            "Opening project files...",
+            "Parsing project components and visual specifications...",
+            "Compiling project screenshots and user flow diagrams...",
             "Gathering launch metrics and user feedback data..."
         ],
         detailPanelId: 'digital_power_packs',

@@ -7,11 +7,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
-
-# Install vite as dev dependency (needed for build)
-RUN npm install --save-dev vite @vitejs/plugin-react
+# Install dependencies including devDependencies for build
+RUN npm ci
 
 # Copy application files
 COPY . .
