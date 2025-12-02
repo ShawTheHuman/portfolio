@@ -1,6 +1,5 @@
 // Detailed project data for the detail panel
-import budgetTiersImg from '../assets/budget_tiers_ui.png';
-import digitalPowerPacksImg from '../assets/digital_power_packs_bg.png';
+import { ASSET_URLS } from '../config/assetUrls';
 
 const projectDetails = {
     budget_tiers: {
@@ -103,17 +102,17 @@ const projectDetails = {
             {
                 description: 'The process began by identifying the revenue stream and gathering generative feedback and research to validate the target market. We built a prototype to test market fit with our current users.',
                 media: [
-                    { type: 'image', url: '/assets/PP-assets/PP_1_Mock.png', caption: 'Initial Concept Mockup' },
-                    { type: 'image', url: '/assets/PP-assets/PP_2_Mock.png', caption: 'Pack Opening Flow' },
-                    { type: 'video', url: '/assets/PP-assets/vid_PP_00.mov', caption: 'Early Prototype Demo' }
+                    { type: 'image', url: PP1Mock, caption: 'Initial Concept Mockup' },
+                    { type: 'image', url: PP2Mock, caption: 'Pack Opening Flow' },
+                    { type: 'video', url: vidPP00, caption: 'Early Prototype Demo' }
                 ]
             },
             {
                 description: 'We iterated on the prototype and mocks based on user feedback, refining the interaction models and visual design.',
                 media: [
-                    { type: 'image', url: '/assets/PP-assets/PP_3_Mock.png', caption: 'Refined UI Iteration' },
-                    { type: 'image', url: '/assets/PP-assets/PP_4_Mock.png', caption: 'Card Reveal Animation' },
-                    { type: 'video', url: '/assets/PP-assets/vid_PP_01.mov', caption: 'High-Fidelity Interaction' }
+                    { type: 'image', url: PP3Mock, caption: 'Refined UI Iteration' },
+                    { type: 'image', url: PP4Mock, caption: 'Card Reveal Animation' },
+                    { type: 'video', url: vidPP01, caption: 'High-Fidelity Interaction' }
                 ]
             }
         ],
@@ -122,9 +121,9 @@ const projectDetails = {
             {
                 description: 'Synthesized feedback and presented findings to leadership to drive product manager adoption and define MVP features. Managed cross-company design and product relationships with PSA to ensure design consistency across all touchpoints.',
                 media: [
-                    { type: 'image', url: '/assets/PP-assets/PP_5_Mock.png', caption: 'Final Dashboard Design' },
-                    { type: 'image', url: '/assets/PP-assets/PP_6_Mock.png', caption: 'Mobile Experience' },
-                    { type: 'image', url: '/assets/PP-assets/PP_7_Mock.png', caption: 'Physical Redemption Flow' }
+                    { type: 'image', url: PP5Mock, caption: 'Final Dashboard Design' },
+                    { type: 'image', url: PP6Mock, caption: 'Mobile Experience' },
+                    { type: 'image', url: PP7Mock, caption: 'Physical Redemption Flow' }
                 ]
             }
         ]
