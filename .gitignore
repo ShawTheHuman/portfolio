@@ -10,6 +10,7 @@ coverage
 dist
 build
 src/assets
+public/assets
 
 # Misc
 .DS_Store
