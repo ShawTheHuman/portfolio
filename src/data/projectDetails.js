@@ -44,12 +44,19 @@ const projectDetails = {
         ],
 
         process: [
-            'User research and synthesis',
-            'Concept ideation and sketching',
-            'Rapid prototyping and testing',
-            'Design system integration',
-            'Collaboration with data science team',
-            'A/B testing and iteration'
+            { description: 'Market research and competitive analysis', media: [] },
+            { description: 'User journey mapping', media: [] },
+            { description: 'Interactive prototype development', media: [] },
+            { description: 'Animation and micro-interaction design', media: [] },
+            { description: 'Supply chain and fulfillment planning', media: [] },
+            { description: 'Beta testing with collectors', media: [] }
+        ],
+
+        launched: [
+            {
+                description: 'The budget tiers framework was successfully launched to US and JP markets, resulting in a 15% increase in conversion rate.',
+                media: []
+            }
         ]
     },
 
@@ -66,7 +73,7 @@ const projectDetails = {
 
         overview: 'Pioneered a new product category that bridges digital collectibles with physical memorabilia, allowing users to purchase digital packs and receive physical PSA-graded cards.',
 
-        problem: 'The collectibles market was rapidly evolving with digital assets, but collectors still valued physical ownership. We needed to create an experience that satisfied both the excitement of digital pack opening and the tangible value of physical cards.',
+        problem: 'GameStop needed to identify a new revenue stream to move graded Pokemon card inventory. The challenge was to create an engaging digital experience that would drive sales of physical assets while appealing to both traditional collectors and digital natives.',
 
         solution: 'Digital packs, physical cards. Users purchase digital packs online, enjoy the thrill of revealing cards digitally, and receive physical PSA-authenticated slabs delivered to their door. This hybrid approach combines the best of both worlds.',
 
@@ -80,9 +87,9 @@ const projectDetails = {
         ],
 
         impact: [
-            { metric: 'New', label: 'Product Category' },
-            { metric: '2025', label: 'Launch Year' },
-            { metric: 'Patent Pending', label: 'Innovation' }
+            { metric: '$15M+', label: 'Avg Weekly Revenue' },
+            { metric: '10,000+', label: 'Beta Users' },
+            { metric: '85%', label: 'Average Buyback' }
         ],
 
         links: [
@@ -93,12 +100,80 @@ const projectDetails = {
         ],
 
         process: [
-            'Market research and competitive analysis',
-            'User journey mapping',
-            'Interactive prototype development',
-            'Animation and micro-interaction design',
-            'Supply chain and fulfillment planning',
-            'Beta testing with collectors'
+            {
+                description: 'The process began by identifying the revenue stream and gathering generative feedback and research to validate the target market. We built a prototype to test market fit with our current users.',
+                media: [
+                    { type: 'image', url: '/assets/PP-assets/PP_1_Mock.png', caption: 'Initial Concept Mockup' },
+                    { type: 'image', url: '/assets/PP-assets/PP_2_Mock.png', caption: 'Pack Opening Flow' },
+                    { type: 'video', url: '/assets/PP-assets/vid_PP_00.mov', caption: 'Early Prototype Demo' }
+                ]
+            },
+            {
+                description: 'We iterated on the prototype and mocks based on user feedback, refining the interaction models and visual design.',
+                media: [
+                    { type: 'image', url: '/assets/PP-assets/PP_3_Mock.png', caption: 'Refined UI Iteration' },
+                    { type: 'image', url: '/assets/PP-assets/PP_4_Mock.png', caption: 'Card Reveal Animation' },
+                    { type: 'video', url: '/assets/PP-assets/vid_PP_01.mov', caption: 'High-Fidelity Interaction' }
+                ]
+            }
+        ],
+
+        launched: [
+            {
+                description: 'Synthesized feedback and presented findings to leadership to drive product manager adoption and define MVP features. Managed cross-company design and product relationships with PSA to ensure design consistency across all touchpoints.',
+                media: [
+                    { type: 'image', url: '/assets/PP-assets/PP_5_Mock.png', caption: 'Final Dashboard Design' },
+                    { type: 'image', url: '/assets/PP-assets/PP_6_Mock.png', caption: 'Mobile Experience' },
+                    { type: 'image', url: '/assets/PP-assets/PP_7_Mock.png', caption: 'Physical Redemption Flow' }
+                ]
+            }
+        ]
+    },
+
+    gamestop_redesign: {
+        id: 'gamestop_redesign',
+        title: 'GameStop Mobile Redesign',
+        company: 'GameStop',
+        year: '2024',
+        role: 'Lead Product Designer',
+        team: 'Digital Experience',
+        tags: ['Product Design', 'Mobile', 'UX Research', 'Design Systems'],
+
+        overview: 'Led a comprehensive redesign of the GameStop mobile experience, modernizing the UI and improving key user flows to enhance the shopping and discovery experience.',
+
+        problem: 'The existing GameStop mobile app had outdated UI patterns, confusing navigation, and poor conversion rates. Users struggled to find products and complete purchases efficiently.',
+
+        solution: 'Conducted extensive user research and created a modern, intuitive mobile experience with streamlined navigation, improved product discovery, and a cohesive design system.',
+
+        features: [
+            'Redesigned navigation and information architecture',
+            'Modern UI with consistent design language',
+            'Enhanced product discovery and search',
+            'Streamlined checkout flow',
+            'Personalized recommendations',
+            'Improved accessibility standards'
+        ],
+
+        impact: [
+            { metric: '2024', label: 'Launch Year' },
+            { metric: 'iOS & Android', label: 'Platforms' },
+            { metric: 'Improved', label: 'User Experience' }
+        ],
+
+        process: [
+            { description: 'User research and synthesis', media: [] },
+            { description: 'Concept ideation and sketching', media: [] },
+            { description: 'Rapid prototyping and testing', media: [] },
+            { description: 'Design system integration', media: [] },
+            { description: 'Collaboration with data science team', media: [] },
+            { description: 'A/B testing and iteration', media: [] }
+        ],
+
+        launched: [
+            {
+                description: 'The redesigned mobile app launched on iOS and Android in 2024, receiving positive feedback for its improved navigation and modern UI.',
+                media: []
+            }
         ]
     },
 
@@ -129,6 +204,22 @@ const projectDetails = {
             { metric: '2023', label: 'Launch Year' },
             { metric: '40%', label: 'Time Saved' },
             { metric: 'US Market', label: 'Initial Release' }
+        ],
+
+        process: [
+            { description: 'User research and synthesis', media: [] },
+            { description: 'Concept ideation and sketching', media: [] },
+            { description: 'Rapid prototyping and testing', media: [] },
+            { description: 'Design system integration', media: [] },
+            { description: 'Collaboration with data science team', media: [] },
+            { description: 'A/B testing and iteration', media: [] }
+        ],
+
+        launched: [
+            {
+                description: 'The unified campaign creation flow was released to the US market, significantly reducing the time employers spend managing job postings.',
+                media: []
+            }
         ]
     },
 
@@ -147,12 +238,12 @@ const projectDetails = {
 
         solution: 'Created a design system and component library specifically tailored for mid-market needs, balancing power with usability.',
 
-        features: [
-            'Self-service onboarding',
-            'Team management tools',
-            'Role-based permissions',
-            'Analytics dashboard',
-            'Template library'
+        process: [
+            { description: 'Stakeholder interviews', media: [] },
+            { description: 'Component audit', media: [] },
+            { description: 'Design token definition', media: [] },
+            { description: 'Component documentation', media: [] },
+            { description: 'Adoption strategy', media: [] }
         ],
 
         impact: [
@@ -189,6 +280,21 @@ const projectDetails = {
             { metric: '2020', label: 'Launch Year' },
             { metric: '50+', label: 'Components' },
             { metric: 'Enterprise', label: 'Scale' }
+        ],
+
+        process: [
+            { description: 'Stakeholder interviews', media: [] },
+            { description: 'Component audit', media: [] },
+            { description: 'Design token definition', media: [] },
+            { description: 'Component documentation', media: [] },
+            { description: 'Adoption strategy', media: [] }
+        ],
+
+        launched: [
+            {
+                description: 'The enterprise design system is now the standard for all Splunk products, ensuring a consistent user experience across the platform.',
+                media: []
+            }
         ]
     },
 
@@ -219,6 +325,21 @@ const projectDetails = {
             { metric: '2018', label: 'Launch Year' },
             { metric: 'iOS & Android', label: 'Platforms' },
             { metric: '30%', label: 'Reorder Rate Increase' }
+        ],
+
+        process: [
+            { description: 'User research', media: [] },
+            { description: 'Flow mapping', media: [] },
+            { description: 'Visual design', media: [] },
+            { description: 'Prototyping', media: [] },
+            { description: 'Usability testing', media: [] }
+        ],
+
+        launched: [
+            {
+                description: 'The new grocery shopping experience launched on Jet.com mobile apps, driving a 30% increase in reorder rates.',
+                media: []
+            }
         ]
     }
 };

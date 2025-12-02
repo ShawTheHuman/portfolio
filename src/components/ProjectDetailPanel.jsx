@@ -26,17 +26,23 @@ const ProjectDetailPanel = ({ projectData, isOpen, isCollapsed, isLoading, loadi
 
     // Progressive disclosure of loading messages
     useEffect(() => {
+        const timers = [];
         if (isLoading && loadingMessages.length > 0) {
             setVisibleLoadingMessages([]);
 
             loadingMessages.forEach((msg, index) => {
-                setTimeout(() => {
+                const timer = setTimeout(() => {
                     setVisibleLoadingMessages(prev => [...prev, msg]);
                 }, index * 600); // Show each message 600ms apart
+                timers.push(timer);
             });
         } else {
             setVisibleLoadingMessages([]);
         }
+
+        return () => {
+            timers.forEach(timer => clearTimeout(timer));
+        };
     }, [isLoading, loadingMessages]);
 
     const handleScroll = (e) => {
@@ -208,7 +214,75 @@ const ProjectDetailPanel = ({ projectData, isOpen, isCollapsed, isLoading, loadi
                                     <h2>Process</h2>
                                     <ul className="detail-list">
                                         {projectData.process.map((step, index) => (
-                                            <li key={index}>{step}</li>
+                                            <li key={index} className="process-step-rich">
+                                                <div className="process-step-content">
+                                                    <p className="process-step-description">{step.description}</p>
+                                                    {step.media && step.media.length > 0 && (
+                                                        <div className="process-media-grid">
+                                                            {step.media.map((item, mIndex) => (
+                                                                <div key={mIndex} className={`process-media-item ${item.type}`}>
+                                                                    {item.type === 'video' ? (
+                                                                        <video
+                                                                            src={item.url}
+                                                                            controls
+                                                                            playsInline
+                                                                            className="process-video"
+                                                                            poster={item.poster}
+                                                                        />
+                                                                    ) : (
+                                                                        <img
+                                                                            src={item.url}
+                                                                            alt={item.caption || `Process step ${index + 1} image ${mIndex + 1}`}
+                                                                            className="process-image"
+                                                                        />
+                                                                    )}
+                                                                    {item.caption && <span className="process-media-caption">{item.caption}</span>}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </section>
+                            )}
+
+                            {/* Launched Section */}
+                            {projectData.launched && projectData.launched.length > 0 && (
+                                <section className="detail-section">
+                                    <h2>Launched</h2>
+                                    <ul className="detail-list">
+                                        {projectData.launched.map((step, index) => (
+                                            <li key={index} className="process-step-rich">
+                                                <div className="process-step-content">
+                                                    <p className="process-step-description">{step.description}</p>
+                                                    {step.media && step.media.length > 0 && (
+                                                        <div className="process-media-grid">
+                                                            {step.media.map((item, mIndex) => (
+                                                                <div key={mIndex} className={`process-media-item ${item.type}`}>
+                                                                    {item.type === 'video' ? (
+                                                                        <video
+                                                                            src={item.url}
+                                                                            controls
+                                                                            playsInline
+                                                                            className="process-video"
+                                                                            poster={item.poster}
+                                                                        />
+                                                                    ) : (
+                                                                        <img
+                                                                            src={item.url}
+                                                                            alt={item.caption || `Launched step ${index + 1} image ${mIndex + 1}`}
+                                                                            className="process-image"
+                                                                        />
+                                                                    )}
+                                                                    {item.caption && <span className="process-media-caption">{item.caption}</span>}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </li>
                                         ))}
                                     </ul>
                                 </section>

@@ -4,11 +4,10 @@
 }
 
 .options-menu-button {
-    width: 44px;
-    height: 44px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
+    border: none;
     color: var(--text-primary);
     display: flex;
     align-items: center;
@@ -16,6 +15,8 @@
     cursor: pointer;
     transition: all 0.3s ease;
     -webkit-tap-highlight-color: transparent;
+    align-self: center;
+    flex-grow: 0;
 }
 
 .options-menu-button:hover {
@@ -26,6 +27,11 @@
 
 .options-menu-button:active {
     transform: scale(0.98);
+}
+
+.options-menu-button svg {
+    width: 14px;
+    height: 14px;
 }
 
 .options-menu-dropdown {
