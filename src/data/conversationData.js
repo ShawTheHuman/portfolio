@@ -12,8 +12,6 @@ const conversationData = {
         quickReplies: [
             { id: 'about', label: 'Tell me more about you', icon: '👋' },
             { id: 'projects', label: 'I want to see your work', icon: '🎨' },
-            { id: 'experience', label: 'I want to know about your experience', icon: '💼' },
-            { id: 'reviews', label: 'I want to read some reviews about you', icon: '⭐' },
             { id: 'credits', label: 'How was this built?', icon: '💻' }
         ]
     },
@@ -27,6 +25,7 @@ const conversationData = {
         ],
         quickReplies: [
             { id: 'projects', label: 'I want to see your work', icon: '🎨' },
+            { id: 'reviews', label: 'I want to read some reviews about you', icon: '⭐' },
             { id: 'experience', label: 'I want to know about your experience', icon: '💼' },
             { id: 'welcome', label: '← Back to menu', icon: '🏠' }
         ]
@@ -41,51 +40,34 @@ const conversationData = {
         quickReplies: [
             {
                 id: 'project_digital_power_packs',
-                label: 'Digital PowerPacks',
-                title: 'Digital PowerPacks',
+                label: 'GameStop Power Packs',
+                title: 'GameStop Power Packs',
                 tags: ['2025', 'Product Design', 'Web3'],
-                image: '/assets/digital_power_packs_bg.png',
+                image: './assets/digital_power_packs_bg.png',
                 icon: '🎮'
             },
             {
-                id: 'project_budget_tiers',
-                label: 'Indeed Budget Tiers',
-                title: 'Indeed Budget Tiers',
-                tags: ['2024', 'UX Research', 'B2B'],
-                image: '/assets/budget_tiers_ui.png',
-                icon: '💰'
-            },
-            {
-                id: 'project_activations',
-                label: 'Campaign Creation',
-                title: 'Campaign Creation',
-                tags: ['2023', 'Interaction Design', 'Mobile'],
-                image: '/assets/hero-image.png',
-                icon: '📱'
-            },
-            {
-                id: 'project_indeed_midmarket',
-                label: 'Mid-market Tools',
-                title: 'Mid-market Tools',
-                tags: ['2022', 'Enterprise', 'SaaS'],
-                image: '/assets/hero-image.png',
-                icon: '🛠️'
-            },
-            {
-                id: 'project_splunk',
-                label: 'Splunk Design System',
-                title: 'Splunk Design System',
-                tags: ['2020', 'Design Systems', 'UI Kit'],
-                image: '/assets/splunk_components.png',
+                id: 'project_gamestop_redesign',
+                label: 'GameStop Redesign',
+                title: 'GameStop Redesign',
+                tags: ['2024', 'UX Design', 'Mobile'],
+                image: './assets/gamestop_redesign.png',
                 icon: '🎨'
             },
             {
-                id: 'project_jet',
-                label: 'Jet.com Grocery',
-                title: 'Jet.com Grocery',
-                tags: ['2018', 'Mobile App', 'eCommerce'],
-                image: '/assets/jet_final_ui_implementation.png',
-                icon: '🛒'
+                id: 'project_indeed_midmarket',
+                label: 'Indeed Mid-Market',
+                title: 'Indeed Mid-Market',
+                tags: ['2022', 'Enterprise', 'SaaS'],
+                image: './assets/indeed_campaigns_hero.png',
+                icon: '🛠️'
+            },
+            {
+                id: 'older_work',
+                label: 'Older Work',
+                title: 'Older Work',
+                tags: ['Archive', '2018-2024'],
+                icon: '📚'
             },
             {
                 id: 'welcome',
@@ -93,6 +75,41 @@ const conversationData = {
                 title: 'Back to Menu',
                 tags: ['Navigation', 'Home'],
                 icon: '🏠'
+            }
+        ]
+    },
+
+    // Older Work Navigation
+    older_work: {
+        id: 'older_work',
+        botMessages: [
+            "Here are some of my earlier projects:"
+        ],
+        quickReplies: [
+            {
+                id: 'project_budget_tiers',
+                label: 'Indeed Budget Tiers',
+                icon: '💰'
+            },
+            {
+                id: 'project_activations',
+                label: 'Campaign Creation',
+                icon: '📱'
+            },
+            {
+                id: 'project_splunk',
+                label: 'Splunk Design System',
+                icon: '🎨'
+            },
+            {
+                id: 'project_jet',
+                label: 'Jet.com Grocery',
+                icon: '🛒'
+            },
+            {
+                id: 'projects',
+                label: '← Back to projects',
+                icon: '🔙'
             }
         ]
     },
@@ -135,7 +152,39 @@ const conversationData = {
         id: 'project_digital_power_packs_link',
         externalLink: 'https://www.linkedin.com/feed/update/urn:li:activity:7391942200911110144/',
         botMessages: [
-            "Opening LinkedIn... 🔗"
+            "🔗 https://www.linkedin.com/posts/nickbraver_gamestop-nft-collectibles-activity-7158547854033494016-Yz0f"
+        ],
+        quickReplies: [
+            { id: 'projects', label: 'See other projects', icon: '🎨' },
+            { id: 'welcome', label: '← Back to menu', icon: '🏠' }
+        ]
+    },
+
+    // GameStop Redesign Project
+    project_gamestop_redesign: {
+        id: 'project_gamestop_redesign',
+        botMessages: [
+            "🎨 GameStop Redesign"
+        ],
+        loadingMessages: [
+            "Loading design files and prototypes...",
+            "Gathering user research insights and feedback...",
+            "Compiling UI components and design system...",
+            "Preparing flow diagrams and interaction patterns..."
+        ],
+        detailPanelId: 'gamestop_redesign',
+        quickReplies: [
+            { id: 'project_gamestop_redesign_details', label: 'Tell me more about it', icon: '📖' },
+            { id: 'projects', label: '← Back to projects', icon: '🎨' }
+        ]
+    },
+
+    project_gamestop_redesign_details: {
+        id: 'project_gamestop_redesign_details',
+        botMessages: [
+            "A comprehensive redesign of the GameStop mobile experience.",
+            "Focused on improving user flows, modernizing the UI, and creating a cohesive design system.",
+            "The project involved extensive user research and iterative design sprints."
         ],
         quickReplies: [
             { id: 'projects', label: 'See other projects', icon: '🎨' },

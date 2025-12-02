@@ -12,6 +12,11 @@
     backdrop-filter: blur(10px);
     z-index: 1000;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+body.panel-open .header {
+    width: 25%;
 }
 
 .header-logo {

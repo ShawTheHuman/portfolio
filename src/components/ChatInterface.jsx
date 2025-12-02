@@ -62,6 +62,18 @@ const ChatInterface = () => {
         }
     }, [messages, currentNode, isPanelOpen, isPanelCollapsed, activeProjectId]);
 
+    // Toggle body class when panel opens/closes to resize header
+    useEffect(() => {
+        if (isPanelOpen && !isPanelCollapsed) {
+            document.body.classList.add('panel-open');
+        } else {
+            document.body.classList.remove('panel-open');
+        }
+        return () => {
+            document.body.classList.remove('panel-open');
+        };
+    }, [isPanelOpen, isPanelCollapsed]);
+
     // Auto-scroll to bottom
     useEffect(() => {
         scrollToBottom();

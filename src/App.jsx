@@ -3,10 +3,18 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Home from './pages/Home'
 import PasswordPrompt from './components/PasswordPrompt'
+import { getCookie } from './utils/cookies'
 import './styles/global.css'
 
 function App() {
-    const [unlocked, setUnlocked] = useState(sessionStorage.getItem('unlocked') === 'true');
+    const [unlocked, setUnlocked] = useState(() => {
+        // Check cookie first, then sessionStorage
+        const cookiePassword = getCookie('portfolio_access');
+        if (cookiePassword && cookiePassword.startsWith('access-') && cookiePassword.length > 'access-'.length) {
+            return true;
+        }
+        return sessionStorage.getItem('unlocked') === 'true';
+    });
 
     useEffect(() => {
         if (unlocked) {

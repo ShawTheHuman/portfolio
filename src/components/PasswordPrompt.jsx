@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { setCookie } from '../utils/cookies';
 import '../styles/PasswordPrompt.css';
 
 const PasswordPrompt = ({ onUnlock }) => {
@@ -8,6 +9,9 @@ const PasswordPrompt = ({ onUnlock }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password.startsWith('access-') && password.length > 'access-'.length) {
+            // Set cookie with 7-day expiration
+            setCookie('portfolio_access', password, 7);
+
             // Track the password variant
             fetch('/api/track', {
                 method: 'POST',
