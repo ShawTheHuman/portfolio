@@ -1,5 +1,4 @@
-# Build stage
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 WORKDIR /app
 
 COPY package*.json ./
@@ -8,19 +7,10 @@ RUN npm ci
 COPY index.html ./
 COPY vite.config.js ./
 COPY src ./src
-
-RUN npm run build && test -d dist
-
-# Production stage
-FROM node:20-alpine
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm ci --only=production
-
-COPY server.js app.js ./
+COPY server.js ./
 COPY data ./data
-COPY --from=builder /app/dist ./dist
+
+RUN npm run build
 
 EXPOSE 3000
 
