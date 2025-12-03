@@ -11,7 +11,7 @@ const projectDetails = {
         team: 'Monetization & Growth',
         tags: ['Product Design', 'B2B SaaS', 'Revenue Growth', 'User Research'],
 
-        hero: budgetTiersImg,
+        hero: ASSET_URLS.budgetTiersUi,
 
         overview: 'Led the design of a budget recommendation framework that helped employers understand how much to invest in job sponsorships to achieve their hiring goals.',
 
@@ -68,7 +68,7 @@ const projectDetails = {
         team: 'Special Projects',
         tags: ['Product Design', 'E-commerce', 'Collectibles', 'Innovation'],
 
-        hero: digitalPowerPacksImg,
+        hero: ASSET_URLS.digitalPowerPacksBg,
 
         overview: 'Pioneered a new product category that bridges digital collectibles with physical memorabilia, allowing users to purchase digital packs and receive physical PSA-graded cards.',
 
@@ -102,17 +102,17 @@ const projectDetails = {
             {
                 description: 'The process began by identifying the revenue stream and gathering generative feedback and research to validate the target market. We built a prototype to test market fit with our current users.',
                 media: [
-                    { type: 'image', url: PP1Mock, caption: 'Initial Concept Mockup' },
-                    { type: 'image', url: PP2Mock, caption: 'Pack Opening Flow' },
-                    { type: 'video', url: vidPP00, caption: 'Early Prototype Demo' }
+                    { type: 'image', url: ASSET_URLS.PP1Mock, caption: 'Initial Concept Mockup' },
+                    { type: 'image', url: ASSET_URLS.PP2Mock, caption: 'Pack Opening Flow' },
+                    { type: 'video', url: ASSET_URLS.vidPP00, caption: 'Early Prototype Demo' }
                 ]
             },
             {
                 description: 'We iterated on the prototype and mocks based on user feedback, refining the interaction models and visual design.',
                 media: [
-                    { type: 'image', url: PP3Mock, caption: 'Refined UI Iteration' },
-                    { type: 'image', url: PP4Mock, caption: 'Card Reveal Animation' },
-                    { type: 'video', url: vidPP01, caption: 'High-Fidelity Interaction' }
+                    { type: 'image', url: ASSET_URLS.PP3Mock, caption: 'Refined UI Iteration' },
+                    { type: 'image', url: ASSET_URLS.PP4Mock, caption: 'Card Reveal Animation' },
+                    { type: 'video', url: ASSET_URLS.vidPP01, caption: 'High-Fidelity Interaction' }
                 ]
             }
         ],
@@ -121,9 +121,9 @@ const projectDetails = {
             {
                 description: 'Synthesized feedback and presented findings to leadership to drive product manager adoption and define MVP features. Managed cross-company design and product relationships with PSA to ensure design consistency across all touchpoints.',
                 media: [
-                    { type: 'image', url: PP5Mock, caption: 'Final Dashboard Design' },
-                    { type: 'image', url: PP6Mock, caption: 'Mobile Experience' },
-                    { type: 'image', url: PP7Mock, caption: 'Physical Redemption Flow' }
+                    { type: 'image', url: ASSET_URLS.PP5Mock, caption: 'Final Dashboard Design' },
+                    { type: 'image', url: ASSET_URLS.PP6Mock, caption: 'Mobile Experience' },
+                    { type: 'image', url: ASSET_URLS.PP7Mock, caption: 'Physical Redemption Flow' }
                 ]
             }
         ]

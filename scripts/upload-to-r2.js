@@ -63,7 +63,7 @@ async function main() {
     console.log('🚀 Starting asset upload to Cloudflare R2...');
 
     const assetUrls = {};
-    const processedFiles = new Set();
+
 
     for (const dir of ASSET_DIRS) {
         if (!fs.existsSync(dir)) {
@@ -99,7 +99,7 @@ async function main() {
             try {
                 const url = await uploadFile(fullPath, key);
                 assetUrls[objectKey] = url;
-            } catch (err) {
+            } catch {
                 console.error(`Failed to process ${fullPath}`);
             }
         }
