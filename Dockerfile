@@ -7,7 +7,11 @@ RUN npm ci
 
 COPY index.html vite.config.js ./
 COPY src ./src
-RUN npm run build
+RUN npm run build && \
+    ls -la && \
+    test -d dist && \
+    ls -la dist/ && \
+    echo "Build successful!"
 
 # Production stage
 FROM node:20-alpine
