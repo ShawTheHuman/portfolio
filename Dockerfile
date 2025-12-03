@@ -4,11 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 
-COPY index.html ./
-COPY vite.config.js ./
-COPY src ./src
-COPY server.js ./
-COPY data ./data
+COPY . .
 
 RUN npm run build
 
