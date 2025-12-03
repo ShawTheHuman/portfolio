@@ -1,5 +1,6 @@
 // Conversation flow data structure
 // Each node represents a conversation state with bot messages and quick reply options
+import { ASSET_URLS } from '../config/assetUrls';
 
 const conversationData = {
     welcome: {
