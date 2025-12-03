@@ -8,7 +8,7 @@ const conversationData = {
             "Hi! I'm Nick Braver 👋",
             "I'm a Product Designer who's been crafting digital experiences for B2B, B2C e-commerce companies and startups since 2014."
         ],
-        image: './assets/hero-image.png',
+        image: ASSET_URLS.heroImage,
         quickReplies: [
             { id: 'about', label: 'Tell me more about you', icon: '👋' },
             { id: 'projects', label: 'I want to see your work', icon: '🎨' },
@@ -43,7 +43,7 @@ const conversationData = {
                 label: 'GameStop Power Packs',
                 title: 'GameStop Power Packs',
                 tags: ['2025', '0 to 1 launch', 'eCommerce', 'B2C'],
-                image: './assets/digital_power_packs_bg.png',
+                image: ASSET_URLS.digitalPowerPacksBg,
                 icon: '🎮'
             },
             {
@@ -51,7 +51,7 @@ const conversationData = {
                 label: 'GameStop Redesign',
                 title: 'GameStop Redesign',
                 tags: ['2025', 'Feature Improvements', 'eCommerce', 'B2C'],
-                image: './assets/gamestop_redesign.png',
+                image: ASSET_URLS.gamestopRedesign,
                 icon: '🎨'
             },
             {
@@ -59,7 +59,7 @@ const conversationData = {
                 label: 'Indeed Mid-Market',
                 title: 'Indeed Mid-Market',
                 tags: ['2023', 'Enterprise', 'SaaS', 'B2B'],
-                image: './assets/indeed_campaigns_hero.png',
+                image: ASSET_URLS.indeedCampaignsHero,
                 icon: '🛠️'
             },
             {
@@ -140,7 +140,7 @@ const conversationData = {
             "This innovative product bridges the gap between digital collectibles and physical memorabilia.",
             "Users can purchase digital packs and reveal cards digitally, then receive physical PSA-graded cards."
         ],
-        image: './assets/digital_power_packs_bg.png',
+        image: ASSET_URLS.digitalPowerPacksBg,
         quickReplies: [
             { id: 'project_digital_power_packs_link', label: 'View launch post', icon: '🔗' },
             { id: 'projects', label: 'See other projects', icon: '🎨' },
@@ -235,7 +235,7 @@ const conversationData = {
             "The framework provides clear guidance on recommended budget levels based on job characteristics and market data.",
             "This helps employers make informed decisions about their job sponsorship investments."
         ],
-        image: '/assets/budget_tiers_ui.png',
+        image: ASSET_URLS.budgetTiersUi,
         quickReplies: [
             { id: 'project_budget_tiers_impact', label: 'What was the impact?', icon: '📊' },
             { id: 'project_budget_tiers_testimonial', label: 'Testimonial', icon: '💬' },
