@@ -5,13 +5,11 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 
-COPY index.html vite.config.js ./
+COPY index.html ./
+COPY vite.config.js ./
 COPY src ./src
-RUN npm run build && \
-    ls -la && \
-    test -d dist && \
-    ls -la dist/ && \
-    echo "Build successful!"
+
+RUN npm run build && test -d dist
 
 # Production stage
 FROM node:20-alpine

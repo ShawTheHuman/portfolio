@@ -31,6 +31,7 @@ Archive.zip
 # Config
 .config/
 builder.config.json
+scripts/upload-to-r2.js
 
 # Old ESLint config (replaced by eslint.config.js)
 .eslintrc.cjs
