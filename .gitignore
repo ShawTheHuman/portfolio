@@ -9,8 +9,6 @@ coverage
 # Production
 dist
 build
-src/assets
-public/assets
 
 # Misc
 .DS_Store
@@ -31,7 +29,6 @@ Archive.zip
 # Config
 .config/
 builder.config.json
-scripts/upload-to-r2.js
 
 # Old ESLint config (replaced by eslint.config.js)
 .eslintrc.cjs
