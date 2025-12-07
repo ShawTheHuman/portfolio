@@ -1,0 +1,35 @@
+.home-header {
+    text-align: center;
+    padding: 4rem 0 2rem;
+    margin-bottom: 2rem;
+}
+
+.home-header h1 {
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin: 0 0 1rem 0;
+}
+
+.home-subheader {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    .home-header h1 {
+        font-size: 3.5rem;
+    }
+
+    .home-subheader {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+}
